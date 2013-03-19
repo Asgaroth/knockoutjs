@@ -93,7 +93,8 @@
     });
 
     self.balance = ko.computed(function(){
-      return 100-(self.totalEnGastos()/self.presupuesto*100);
+      var v = ( 100 - (self.totalEnGastos()/self.presupuesto*100));
+      return v > 0? v:0;
     });
 
 

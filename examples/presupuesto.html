@@ -14,6 +14,28 @@
         <h1>Gastos</h1>
       </header>
 
+      <div class="row">
+        <div class="span12">
+          <table class="table table-condensed">
+                     <tbody>
+                       <tr>
+                         <th>Presupuesto:</th>
+                         <td  data-bind="text: presupuesto">0</td>
+                       </tr>
+                       <tr>
+                         <th>Disponible:</th>
+                         <td data-bind="text: presupuesto-totalEnGastos()">0</td>
+                       </tr>
+                   </tbody>
+                 </table>
+        </div>
+        <div class="span12">
+          <div class="progress">
+            <div class="bar" data-bind="style: {width: balance()+'%'}" style="width: 100%"></div>
+          </div>
+        </div>
+      </div>
+
       <div class="row" id="new-gasto" data-bind="with: actual">
           <div class="span5" >
               <input class="span5" data-bind="value: titulo, valueUpdate: 'afterkeydown'" placeholder="Gasto?" autofocus>
@@ -31,7 +53,7 @@
               <option>Entretenimiento</option>
             </select>
           </div>
-          <button type="submit" data-bind="click: $parent.agregar, disable: $parent.balance() < 0.01" class="btn btn-large pull-right">Crear Gasto</button>
+          <button type="submit" data-bind="click: $parent.agregar, visible: $parent.balance() > 0" class="btn btn-large pull-right">Crear Gasto</button>
       </div>
 
       <div class="row">
