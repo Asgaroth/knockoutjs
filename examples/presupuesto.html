@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <title>Knockout.js • Gastos</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/app.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+      <header class="hero-unit">
+        <h1>Gastos</h1>
+      </header>
+
+      <div class="row" id="new-gasto" data-bind="with: actual">
+          <div class="span5" >
+              <input class="span5" data-bind="value: titulo, valueUpdate: 'afterkeydown'" placeholder="Gasto?" autofocus>
+          </div>
+          <div class="span4" id="val-input">
+           <div class="input-prepend">
+             <span class="add-on">$</span>
+             <input class="span3" data-bind="value: valor, valueUpdate: 'afterkeydown'" placeholder="Valor?">
+           </div>
+          </div>
+          <div class="span3">
+            <select data-bind="value: categoria">
+              <option>Comida</option>
+              <option>Transporte</option>
+              <option>Entretenimiento</option>
+            </select>
+          </div>
+          <button type="submit" data-bind="click: $parent.agregar, disable: $parent.balance() < 0.01" class="btn btn-large pull-right">Crear Gasto</button>
+      </div>
+
+      <div class="row">
+        <section id="main" class="span12" data-bind="visible: gastos().length">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Gasto</th>
+                <th>Valor</th>
+                <th>Categoria</th>
+              </tr>
+            </thead>
+            <tbody id="gastos-list" data-bind="foreach: gastos">
+              <tr data-bind="css: { editando: editando }">
+                <td>
+                  <label data-bind="text: titulo, event: { dblclick: $root.editarGasto }"></label>
+                  <input class="edit" data-bind="
+                    value: titulo, 
+                    valueUpdate: 'afterkeydown', 
+                    enterKey: $root.pararEdicion">
+                </td>
+                <td>
+                  <label data-bind="text: valor, event: { dblclick: $root.editarGasto }"></label>
+                  <div class="input-prepend hidden">
+                    <span class="add-on">$</span>
+                    <input data-bind="value: valor, valueUpdate: 'afterkeydown', enterKey: $root.pararEdicion">
+                  </div>
+                </td>
+                <td>
+                  <label data-bind="text: categoria, event: { dblclick: $root.editarGasto }"></label>
+                  <div class="hidden">
+                    <select data-bind="value: categoria">
+                      <option>Comida</option>
+                      <option>Transporte</option>
+                      <option>Entretenimiento</option>
+                    </select>
+                  </div>
+                  <button class="eliminar" data-bind="click: $root.eliminar"></button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>
+                  No: <span data-bind="text: numeroDeGastos"></span>
+                </td>
+                <td colspan="3">
+                  Total: $ <span data-bind="text: totalEnGastos">0</span>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </section>
+      </div>
+    </div>
+
+    <footer id="info">
+      <p>Double-click para editar un gasto</p>
+    </footer>
+    <script src="js/knockout.js"></script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/app2.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <title>Knockout.js • Gastos</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/app.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+      <header class="hero-unit">
+        <h1>Gastos</h1>
+      </header>
+      <div class="row" id="new-gasto" data-bind="with: actual">
+        <form id="gasto-crear">
+          <div class="span5" >
+              <input class="span5" id="titulo-input" placeholder="Gasto?" autofocus>
+          </div>
+          <div class="span4">
+           <div class="input-prepend">
+             <span class="add-on">$</span>
+             <input class="span3" id="val-input" placeholder="Valor?">
+           </div>
+          </div>
+          <div class="span3">
+            <select id="categoria-input">
+              <option>Comida</option>
+              <option>Transporte</option>
+              <option>Entretenimiento</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-large pull-right">Crear Gasto</button>
+        </form>
+      </div>
+
+      <div class="row">
+        <section id="main" class="span12">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Gasto</th>
+                <th>Valor</th>
+                <th>Categoria</th>
+              </tr>
+            </thead>
+            <tbody id="gastos-lista">
+              <script id="gasto-template" type="text/x-handlebars-template">
+              {{#this}}
+              <tr data-bind="css: { editando: editando }"  data-id="{{id}}">
+                <td>
+                  <label>{{titulo}}</label>
+                  <input class="edit" value="{{titulo}}" />
+                </td>
+                <td>
+                  <label>{{valor}}</label>
+                  <div class="input-prepend hidden">
+                    <span class="add-on">$</span>
+                    <input class="val" value="{{valor}}" />
+                  </div>
+                </td>
+                <td>
+                  <label>{{categoria}}</label>
+                  <div class="hidden">
+                    <select class="cat">
+                      <option {{#if categoria=="Comida"}}selected{{/if}}>Comida</option>
+                      <option {{#if categoria=="Transporte"}}selected{{/if}}>Transporte</option>
+                      <option {{#if categoria=="Entretenimiento"}}selected{{/if}}>Entretenimiento</option>
+                    </select>
+                  </div>
+                  <button class="eliminar"></button>
+                </td>
+              </tr>
+              {/this}}
+              </script>
+            </tbody>
+            <tfoot>
+              <script id="footer-template" type="text/x-handlebars-template">
+              <tr>
+                <td>
+                  No: <span>{{numeroDeGastos}}</span>
+                </td>
+                <td colspan="3">
+                  Total: $ <span>{{totalEnGastos}}</span>
+                </td>
+              </tr>
+              </script>
+            </tfoot>
+          </table>
+        </section>
+      </div>
+    </div>
+
+    <footer id="info">
+      <p>Double-click para editar un gasto</p>
+    </footer>
+    <script src="js/handlebars.js"></script>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/jq.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
