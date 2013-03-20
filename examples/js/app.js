@@ -50,9 +50,6 @@
     // el gasto actual
     self.actual = ko.observable(new Gasto('', '', ''));
 
-    self.filtro = ko.observable('Todos');
-
-
     // agrega un nuevo gasto
     self.agregar = function () {
       var actual = self.actual();
